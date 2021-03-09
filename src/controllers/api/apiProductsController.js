@@ -66,15 +66,16 @@ module.exports = {
         // res.send("holaaa desde el products controller método offers")
     },
     
-    async categories (req, res) {
+    categories (req, res) {
+        
 		let products = [];
 		let title = "Todos los productos";
 
-		if (req.params.category) {
+		if (req.params.category != undefined) {
 
             title = req.params.category;
 
-			let category = await Category.findOne({
+			let category = Category.findOne({
 				where: {
 				   name: req.params.category
 				},
@@ -86,7 +87,8 @@ module.exports = {
                     "meta": {
                         "status": 200,
                         "title":title,
-                        "url": "/api/products/categories/"+category.name 
+                        "count":category.products.length,
+                        "url": "/api/products/categories/" + category.name 
                     },
                     "data": {
                         category
@@ -100,7 +102,7 @@ module.exports = {
 
 
 		} else {
-			products = await Product.findAll({
+			products = Product.findAll({
                 order: [
                     ['categoryId']
                 ]            
