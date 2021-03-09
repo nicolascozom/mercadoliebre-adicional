@@ -8,6 +8,8 @@ window.onload = function () {
 
     let categoria = document.getElementById("categoria") // RECIBE LA CATEGORÍA QUE LUEGO PASA POR URL AL CONTROLLER
 
+    let button = document.getElementById("allProducts")
+
     axios.get(`http://localhost:3000/api/products/categories/${categoria.value}`) // TRAIGO LOS PRODUCTOS YA FILTRADOS
 
 
@@ -110,6 +112,11 @@ window.onload = function () {
 
     })
     .catch(e => console.log(e))
+
+
+    button.addEventListener("click",(function(){
+        window.location.href = "http://localhost:3000/products/categories"
+    }))
 
 
 }
