@@ -71,6 +71,8 @@ module.exports = {
 		let products = [];
 		let title = "Todos los productos";
 
+        console.log(req.params)
+
 		if (req.params.category != undefined) {
 
             title = req.params.category;
