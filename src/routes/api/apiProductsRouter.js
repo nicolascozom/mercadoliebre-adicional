@@ -9,4 +9,6 @@ router.get('/latest', apiProductsController.latest); /* GET - Últimos productos
 
 router.get('/offers', apiProductsController.offers); /* GET - Productos en oferta*/
 
+router.get('/categories/:category?', apiProductsController.categories)
+
 module.exports = router;

@@ -64,5 +64,64 @@ module.exports = {
         .catch(e => console.log(e));
 
         // res.send("holaaa desde el products controller método offers")
-    }
+    },
+    
+    async categories (req, res) {
+		let products = [];
+		let title = "Todos los productos";
+
+		if (req.params.category) {
+
+            title = req.params.category;
+
+			let category = await Category.findOne({
+				where: {
+				   name: req.params.category
+				},
+				include: ['products']
+			})
+			
+            .then(function(category){
+                let respuesta = {
+                    "meta": {
+                        "status": 200,
+                        "title":title,
+                        "url": "/api/products/categories/"+category.name 
+                    },
+                    "data": {
+                        category
+                    }
+                };
+
+                res.json(respuesta)
+            })
+            .catch(e => console.log(e));
+			 
+
+
+		} else {
+			products = await Product.findAll({
+                order: [
+                    ['categoryId']
+                ]            
+            })
+            .then(function(products){
+                let respuesta = {
+                    "meta": {
+                        "status": 200,
+                        "title":'Todas las categorías',
+                        "url": "/api/products/categories/" 
+                    },
+                    "data": {
+                        products
+                    }
+                };
+
+                res.json(respuesta)
+            })
+            .catch(e => console.log(e));
+
+		}
+	}
+
 }
