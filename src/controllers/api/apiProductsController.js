@@ -85,7 +85,7 @@ module.exports = {
             .then(function(category){
                 let respuesta = {
                     "meta": {
-                        "status": 200,
+                        "status": 201,
                         "title":title,
                         "count":category.products.length,
                         "url": "/api/products/categories/" + category.name 
